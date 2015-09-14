@@ -4,7 +4,9 @@ namespace EXSyst\Common;
 
 abstract class Enum
 {
-    private function __construct() { }
+    private function __construct()
+    {
+    }
 
     public static function isValid($value)
     {
@@ -14,16 +16,20 @@ abstract class Enum
     public static function getValue($name)
     {
         $values = static::getValues();
-        if (!isset($values[$name]))
-            return null;
+        if (!isset($values[$name])) {
+            return;
+        }
+
         return $values[$name];
     }
 
     public static function getName($value)
     {
         $name = array_search($value, static::getValues());
-        if ($name === false)
-            return null;
+        if ($name === false) {
+            return;
+        }
+
         return $name;
     }
 
@@ -35,8 +41,9 @@ abstract class Enum
             $values = $clazz->getConstants();
         }
 
-        if($case_lower)
+        if ($case_lower) {
             $values = array_change_key_case($values);
+        }
 
         return $values;
     }
